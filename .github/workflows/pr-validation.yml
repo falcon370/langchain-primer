@@ -1,0 +1,39 @@
+name: PR Validation
+
+on:
+  pull_request:
+    branches: [ main ]
+    # Only run when relevant files are changed to save on API costs
+    paths:
+      - 'submissions/**'
+      - 'tests/**'
+      - 'requirements.txt'
+
+jobs:
+  test-submission:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip' # Speeds up future runs by caching dependencies
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      - name: Run Pytest
+        env:
+          # This pulls the secret you set in GitHub Repo Settings
+          OPENAI_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          # Ensures Python can find the 'submissions' and 'tests' folders
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          # Runs all tests in the tests/ directory with verbose output
+          pytest tests/ -v
