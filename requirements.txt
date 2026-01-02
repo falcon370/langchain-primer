@@ -1,91 +1,85 @@
-
-
 # ===============================
-# Python version
-# Recommended: Python 3.10.x
+# Core LangChain & AI
 # ===============================
-
-
-# ===============================
-# Core LangChain (PINNED & MATCHED)
-# ===============================
-langchain==0.1.16
-langchain-openai==0.1.6
-langchain-anthropic==0.1.11
-langchain-community==0.0.38
-
+langchain
+langchain-openai
+langchain-anthropic
+langchain-community
 
 # ===============================
 # LLM Providers
 # ===============================
-openai==1.24.0
-anthropic==0.25.6
-
+openai>=1.0.0
+anthropic
 
 # ===============================
 # Vector Stores & Document Parsing
 # ===============================
-faiss-cpu==1.7.4
-chromadb==0.4.24
-pypdf==3.17.1
-python-docx==0.8.11
-
+faiss-cpu
+chromadb
+pypdf
+python-docx
 
 # ===============================
 # Web APIs & Backend
 # ===============================
-fastapi==0.104.1
-uvicorn==0.24.0
-requests==2.31.0
-pydantic==2.5.3
-
+fastapi
+uvicorn[standard]
+requests
+pydantic>=2.0.0
 
 # ===============================
 # Data Processing
 # ===============================
-pandas==2.1.1
-numpy==1.26.2
-
+pandas
+numpy
 
 # ===============================
 # Jupyter & Interactive Dev
 # ===============================
-jupyter==1.0.0
-jupyterlab==4.0.9
-notebook==7.0.6
-ipython==8.17.2
-ipykernel==6.27.1
-ipywidgets==8.1.1
-
+jupyter
+jupyterlab
+notebook
+ipython
+ipykernel
+ipywidgets
 
 # ===============================
 # Testing
 # ===============================
-pytest==7.4.3
-pytest-asyncio==0.21.1
-pytest-cov==4.1.0
-
+pytest
+pytest-asyncio
+pytest-cov
 
 # ===============================
 # Code Quality & Linting
 # ===============================
-black==23.12.0
-flake8==6.1.0
-mypy==1.7.1
-pylint==3.0.3
-
+black
+flake8
+mypy
+pylint
 
 # ===============================
 # Utilities
 # ===============================
-python-dotenv==1.0.0
-rich==13.7.0
-tqdm==4.66.1
-colorama==0.4.6
-
+python-dotenv
+rich
+tqdm
+colorama
 
 # ===============================
 # Async & Networking
 # ===============================
-aiohttp==3.9.1
-asyncio-contextmanager==1.0.1
+aiohttp
+
+# ===============================
+# Notebook Execution
+# ===============================
+nbclient
+nbformat
+
+# ===============================
+# Additional
+# ===============================
+python-dateutil
+pathlib
