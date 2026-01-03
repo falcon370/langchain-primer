@@ -3,11 +3,7 @@ name: PR Validation
 on:
   pull_request:
     branches: [ main ]
-    # Only run when relevant files are changed to save on API costs
-    paths:
-      - 'submissions/**'
-      - 'tests/**'
-      - 'requirements.txt'
+
 
 jobs:
   test-submission:
@@ -31,7 +27,7 @@ jobs:
       - name: Run Pytest
         env:
           # This pulls the secret you set in GitHub Repo Settings
-          OPENAI_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           # Ensures Python can find the 'submissions' and 'tests' folders
           PYTHONPATH: ${{ github.workspace }}
         run: |
