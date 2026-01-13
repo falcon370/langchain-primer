@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 ##----------CONFIG TESTS -------that run every time testing is done
+
 def load_notebook_code(notebook_path):
     """
     Reads a Jupyter Notebook, cleans it, executes it, and returns the variables/functions.
@@ -33,31 +34,50 @@ def load_notebook_code(notebook_path):
     
 
 
-
 @pytest.fixture
 def student_code(request):
     """
     Improved fixture: Detects level (easy/medium/hard) from the test function name
-    to find the correct notebook file.
+    and module number from the test file/module name.
     """
     # 1. Identify which level we are testing
-    node_name = request.node.name.lower() # e.g., "test_easy_task"
+    node_name = request.node.name.lower()  # e.g., "test_easy_task"
     
     if "easy" in node_name:
-        notebook_name = "easy_01.ipynb"
+        level = "easy"
     elif "medium" in node_name:
-        notebook_name = "medium_01.ipynb"
+        level = "medium"
     elif "hard" in node_name:
-        notebook_name = "hard_01.ipynb"
+        level = "hard"
     else:
-        # Fallback to a default if the name doesn't match
-        notebook_name = "module_01.ipynb"
+        level = "module"
     
-    # 2. Path handling
+    # 2. Identify which module we're testing from the module/file name
+    # The module name is something like "test_module01" or "test_module02"
+    module_name = request.module.__name__  # e.g., "tests.test_module01"
+    
+    # Extract the number from module name
+    import re
+    module_number = "01"  # default
+    
+    # Look for patterns like module01, module02 in the module path
+    match = re.search(r'module(\d{2})', module_name)
+    if match:
+        module_number = match.group(1)
+    else:
+        # Try alternative pattern
+        match = re.search(r'_(\d{2})', module_name)
+        if match:
+            module_number = match.group(1)
+    
+    # 3. Form the notebook name
+    notebook_name = f"{level}_{module_number}.ipynb"
+    
+    # 4. Path handling
     root_dir = Path(__file__).parent.parent
     submission_path = root_dir / "submissions" / notebook_name
     
-    # Debug print (will show up if you run pytest -s)
-    # print(f"\n🔍 Searching for: {submission_path}")
+    print(f"\n🔍 Looking for notebook: {notebook_name} at {submission_path}")
     
     return load_notebook_code(str(submission_path))
+
