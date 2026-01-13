@@ -3,6 +3,11 @@ name: PR Validation
 on:
   pull_request:
     branches: [ main ]
+     # Only run when relevant files are changed to save on API costs
+    paths:
+      - 'submissions/**'
+      - 'tests/**'
+      - 'requirements.txt'
 
 
 jobs:
