@@ -98,6 +98,9 @@ pytest
 ## How to use?
 
 - Start with the earliest module in `notebooks/`.
+- Create a new .ipynb file following the format <level>_0<number>.ipynb
+ `Eg: easy_01.ipynb`
+- Copy the template code in modules and paste it in your newly created file under submissions folder
 - Implement the TODOs
 - Run `pytest` to check correctness. 
 
